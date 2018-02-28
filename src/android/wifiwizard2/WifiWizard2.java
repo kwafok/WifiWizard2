@@ -339,6 +339,16 @@ public class WifiWizard2 extends CordovaPlugin {
                 String newPass = data.getString(2);
                 wifi.preSharedKey = newPass;
 
+                //////////////////////////// hiddenSSID
+                Boolean is_hidden;
+                if (data.length() >=4){
+                    is_hidden = ("hiddenSSID" ==  data.getString(3));
+                }else{
+                    is_hidden = false;
+                }
+                wifi.hiddenSSID = is_hidden;
+                ////////////////////////////
+
                 wifi.status = WifiConfiguration.Status.ENABLED;
                 wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.TKIP);
                 wifi.allowedGroupCiphers.set(WifiConfiguration.GroupCipher.CCMP);
