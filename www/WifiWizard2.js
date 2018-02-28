@@ -82,9 +82,10 @@ var WifiWizard2 = {
      * @param SSID
      * @param password
      * @param algorithm
+     * @param hiddenSSID
      * @returns {*}
      */
-    formatWifiConfig: function (SSID, password, algorithm) {
+    formatWifiConfig: function (SSID, password, algorithm, hiddenSSID) {
         var wifiConfig = {
             SSID: WifiWizard2.formatWifiString(SSID)
         };
@@ -96,7 +97,8 @@ var WifiWizard2 = {
         } else if (algorithm === "WPA") {
             wifiConfig.auth = {
                 algorithm: algorithm,
-                password: WifiWizard2.formatWifiString(password)
+                password: WifiWizard2.formatWifiString(password),
+                hiddenSSID: (hiddenSSID === true)
                 // Other parameters can be added depending on algorithm.
             };
         }
@@ -183,6 +185,13 @@ var WifiWizard2 = {
                 case "WPA":
                     networkInformation.push("WPA");
                     networkInformation.push(wifi.auth.password);
+                    //////////////////////////// hiddenSSID
+                    if (wifi.auth.hiddenSSID){
+                        networkInformation.push("hiddenSSID");
+                    }else{
+                        // pass
+                    }
+                    ////////////////////////////
                     break;
                 case 'WEP':
                     networkInformation.push('WEP');
