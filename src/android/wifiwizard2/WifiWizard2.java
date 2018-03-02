@@ -342,7 +342,7 @@ public class WifiWizard2 extends CordovaPlugin {
                 //////////////////////////// hiddenSSID
                 Boolean is_hidden;
                 if (data.length() >=4){
-                    is_hidden = Objects.equals("hiddenSSID", data.getString(3));
+                    is_hidden = data.getString(3).equals("hiddenSSID");
                 }else{
                     is_hidden = false;
                 }
